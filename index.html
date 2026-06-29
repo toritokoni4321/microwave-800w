@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f2f3f5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="レンジ800W変換">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="format-detection" content="telephone=no">
+  <title>レンジ800W変換</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: #f2f3f5;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: #f2f3f5;
+      color: #111111;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .app {
+      width: min(100%, 480px);
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 16px 12px 24px;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .card {
+      margin: 0 0 12px;
+      padding: 16px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .time-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: nowrap;
+    }
+
+    .time-field {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: 0 0 auto;
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .time-input {
+      width: 84px;
+      min-height: 56px;
+      padding: 10px 12px;
+      border: 1px solid #c9c9c9;
+      border-radius: 12px;
+      background: #ffffff;
+      color: #111111;
+      box-sizing: border-box;
+      font-size: 24px;
+      line-height: 1.2;
+      font-weight: 700;
+      text-align: center;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .time-input:focus {
+      border-color: #111111;
+      outline: 3px solid #d9d9d9;
+    }
+
+    .unit {
+      display: inline-block;
+      min-width: 1em;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .result {
+      margin: 12px 0 0;
+      padding: 12px 14px;
+      background: #f2f3f5;
+      border-radius: 12px;
+      color: #111111;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .reset-button {
+      display: block;
+      width: 100%;
+      min-height: 52px;
+      margin: 14px 0 0;
+      padding: 12px 16px;
+      border: 1px solid #c9c9c9;
+      border-radius: 12px;
+      background: #ffffff;
+      color: #111111;
+      font-size: 16px;
+      font-weight: 800;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .reset-button:active {
+      transform: translateY(1px);
+    }
+
+    @media (max-width: 360px) {
+      .time-row {
+        gap: 10px;
+      }
+
+      .time-input {
+        width: 76px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <h1>レンジ800W変換</h1>
+
+    <section class="card" data-watt="500">
+      <h2>500W・10分未満</h2>
+      <div class="time-row">
+        <label class="time-field">
+          <input class="time-input minute-input" id="m500-short-min" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" data-next="m500-short-sec" autocomplete="off" enterkeyhint="next" autofocus>
+          <span class="unit">分</span>
+        </label>
+        <label class="time-field">
+          <input class="time-input second-input" id="m500-short-sec" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" autocomplete="off" enterkeyhint="done" placeholder="00">
+          <span class="unit">秒</span>
+        </label>
+      </div>
+      <p class="result">800Wなら --</p>
+    </section>
+
+    <section class="card" data-watt="600">
+      <h2>600W・10分未満</h2>
+      <div class="time-row">
+        <label class="time-field">
+          <input class="time-input minute-input" id="m600-short-min" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" data-next="m600-short-sec" autocomplete="off" enterkeyhint="next">
+          <span class="unit">分</span>
+        </label>
+        <label class="time-field">
+          <input class="time-input second-input" id="m600-short-sec" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" autocomplete="off" enterkeyhint="done" placeholder="00">
+          <span class="unit">秒</span>
+        </label>
+      </div>
+      <p class="result">800Wなら --</p>
+    </section>
+
+    <section class="card" data-watt="500">
+      <h2>500W・10分以上</h2>
+      <div class="time-row">
+        <label class="time-field">
+          <input class="time-input minute-input" id="m500-long-min" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-next="m500-long-sec" autocomplete="off" enterkeyhint="next">
+          <span class="unit">分</span>
+        </label>
+        <label class="time-field">
+          <input class="time-input second-input" id="m500-long-sec" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" autocomplete="off" enterkeyhint="done" placeholder="00">
+          <span class="unit">秒</span>
+        </label>
+      </div>
+      <p class="result">800Wなら --</p>
+    </section>
+
+    <section class="card" data-watt="600">
+      <h2>600W・10分以上</h2>
+      <div class="time-row">
+        <label class="time-field">
+          <input class="time-input minute-input" id="m600-long-min" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-next="m600-long-sec" autocomplete="off" enterkeyhint="next">
+          <span class="unit">分</span>
+        </label>
+        <label class="time-field">
+          <input class="time-input second-input" id="m600-long-sec" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" autocomplete="off" enterkeyhint="done" placeholder="00">
+          <span class="unit">秒</span>
+        </label>
+      </div>
+      <p class="result">800Wなら --</p>
+    </section>
+
+    <button class="reset-button" type="button" id="reset">リセット</button>
+  </main>
+
+  <script>
+    (function() {
+      var cards = document.querySelectorAll(".card");
+      var inputs = document.querySelectorAll(".time-input");
+      var minuteInputs = document.querySelectorAll(".minute-input");
+      var firstInput = document.querySelector(".time-input");
+
+      function onlyDigits(value, maxLength) {
+        return value.replace(/\D/g, "").slice(0, maxLength);
+      }
+
+      function readNumber(input) {
+        var value = parseInt(input.value, 10);
+        return isNaN(value) ? 0 : value;
+      }
+
+      function formatTime(totalSeconds) {
+        if (totalSeconds < 60) {
+          return totalSeconds + "秒";
+        }
+
+        var minutes = Math.floor(totalSeconds / 60);
+        var seconds = totalSeconds % 60;
+        return minutes + "分" + seconds + "秒";
+      }
+
+      function updateCard(card) {
+        var watt = Number(card.dataset.watt);
+        var minuteInput = card.querySelector(".minute-input");
+        var secondInput = card.querySelector(".second-input");
+        var result = card.querySelector(".result");
+        var originalSeconds = readNumber(minuteInput) * 60 + readNumber(secondInput);
+
+        if (originalSeconds === 0) {
+          result.textContent = "800Wなら --";
+          return;
+        }
+
+        var convertedSeconds = Math.round(originalSeconds * watt / 800);
+        result.textContent = "800Wなら " + formatTime(convertedSeconds);
+      }
+
+      function selectInput(input) {
+        try {
+          input.setSelectionRange(0, input.value.length);
+        } catch (error) {}
+      }
+
+      function focusInput(input) {
+        try {
+          input.focus({ preventScroll: true });
+        } catch (error) {
+          input.focus();
+        }
+        selectInput(input);
+      }
+
+      function moveFocus(nextId) {
+        var next = document.getElementById(nextId);
+        if (!next) {
+          return;
+        }
+
+        focusInput(next);
+
+        requestAnimationFrame(function() {
+          setTimeout(function() {
+            focusInput(next);
+          }, 30);
+        });
+      }
+
+      function cleanInput(input) {
+        input.value = onlyDigits(input.value, input.maxLength);
+
+        if (input.classList.contains("second-input") && readNumber(input) > 59) {
+          input.value = "59";
+        }
+      }
+
+      inputs.forEach(function(input) {
+        input.addEventListener("input", function() {
+          var card = input.closest(".card");
+
+          cleanInput(input);
+          updateCard(card);
+
+          if (input.classList.contains("minute-input") && input.value.length >= input.maxLength) {
+            moveFocus(input.dataset.next);
+          }
+        });
+
+        input.addEventListener("focus", function() {
+          setTimeout(function() {
+            selectInput(input);
+          }, 0);
+        });
+
+        input.addEventListener("click", function() {
+          selectInput(input);
+        });
+      });
+
+      minuteInputs.forEach(function(input) {
+        input.addEventListener("beforeinput", function(event) {
+          var nextValue = input.value;
+
+          if (event.inputType === "insertText" && event.data) {
+            nextValue = onlyDigits(input.value + event.data, input.maxLength);
+          }
+
+          if (nextValue.length >= input.maxLength) {
+            setTimeout(function() {
+              moveFocus(input.dataset.next);
+            }, 0);
+          }
+        });
+      });
+
+      document.getElementById("reset").addEventListener("click", function() {
+        cards.forEach(function(card) {
+          card.querySelector(".minute-input").value = "";
+          card.querySelector(".second-input").value = "";
+          updateCard(card);
+        });
+
+        if (firstInput) {
+          moveFocus(firstInput.id);
+        }
+      });
+
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function() {
+          navigator.serviceWorker.register("./sw.js", { scope: "./" }).catch(function() {});
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
