@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="レンジ800W変換">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="format-detection" content="telephone=no">
+  <title>レンジ800W変換</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <h1>レンジ800W変換</h1>
+
+    <section class="card" data-watt="500">
+      <h2>500W・10分未満</h2>
+      <div class="time-row">
+        <div class="time-field">
+          <input id="m500-short-min" class="time-input minutes" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" data-maxlength="1" data-next="m500-short-sec" autocomplete="off" enterkeyhint="next" aria-label="500W 10分未満 分" autofocus>
+          <span class="unit">分</span>
+        </div>
+        <div class="time-field">
+          <input id="m500-short-sec" class="time-input seconds" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-maxlength="2" autocomplete="off" enterkeyhint="done" aria-label="500W 10分未満 秒">
+          <span class="unit">秒</span>
+        </div>
+      </div>
+      <p class="result" aria-live="polite">800Wなら --</p>
+    </section>
+
+    <section class="card" data-watt="600">
+      <h2>600W・10分未満</h2>
+      <div class="time-row">
+        <div class="time-field">
+          <input id="m600-short-min" class="time-input minutes" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" data-maxlength="1" data-next="m600-short-sec" autocomplete="off" enterkeyhint="next" aria-label="600W 10分未満 分">
+          <span class="unit">分</span>
+        </div>
+        <div class="time-field">
+          <input id="m600-short-sec" class="time-input seconds" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-maxlength="2" autocomplete="off" enterkeyhint="done" aria-label="600W 10分未満 秒">
+          <span class="unit">秒</span>
+        </div>
+      </div>
+      <p class="result" aria-live="polite">800Wなら --</p>
+    </section>
+
+    <section class="card" data-watt="500">
+      <h2>500W・10分以上</h2>
+      <div class="time-row">
+        <div class="time-field">
+          <input id="m500-long-min" class="time-input minutes" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-maxlength="2" data-next="m500-long-sec" autocomplete="off" enterkeyhint="next" aria-label="500W 10分以上 分">
+          <span class="unit">分</span>
+        </div>
+        <div class="time-field">
+          <input id="m500-long-sec" class="time-input seconds" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-maxlength="2" autocomplete="off" enterkeyhint="done" aria-label="500W 10分以上 秒">
+          <span class="unit">秒</span>
+        </div>
+      </div>
+      <p class="result" aria-live="polite">800Wなら --</p>
+    </section>
+
+    <section class="card" data-watt="600">
+      <h2>600W・10分以上</h2>
+      <div class="time-row">
+        <div class="time-field">
+          <input id="m600-long-min" class="time-input minutes" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-maxlength="2" data-next="m600-long-sec" autocomplete="off" enterkeyhint="next" aria-label="600W 10分以上 分">
+          <span class="unit">分</span>
+        </div>
+        <div class="time-field">
+          <input id="m600-long-sec" class="time-input seconds" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-maxlength="2" autocomplete="off" enterkeyhint="done" aria-label="600W 10分以上 秒">
+          <span class="unit">秒</span>
+        </div>
+      </div>
+      <p class="result" aria-live="polite">800Wなら --</p>
+    </section>
+
+    <button type="button" id="reset">リセット</button>
+  </main>
+</body>
+</html>
